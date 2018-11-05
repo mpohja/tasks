@@ -1,6 +1,6 @@
 import task from './task';
 import auth from './auth';
-import merge from 'lodash/merge'
+import merge from 'lodash/merge';
 
 export default {
   resolvers: merge({}, task.resolvers, auth.resolvers),
@@ -9,7 +9,7 @@ export default {
     ...req,
     models: {
       task: task.model,
-      user: auth.model
-    }
-  })
-}
+      user: auth.model,
+    },
+  }),
+};

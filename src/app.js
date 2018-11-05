@@ -1,9 +1,9 @@
-import {GraphQLServer} from 'graphql-yoga'
+import { GraphQLServer } from 'graphql-yoga';
 import mongoose from 'mongoose';
 import graphqlConfig from './api';
-import {makeExecutableSchema} from 'graphql-tools';
-import {applyMiddleware} from 'graphql-middleware';
-import {authMiddleware} from './api/middlewares';
+import { makeExecutableSchema } from 'graphql-tools';
+import { applyMiddleware } from 'graphql-middleware';
+import { authMiddleware } from './api/middlewares';
 
 const PORT = 3000;
 mongoose.Promise = global.Promise;
@@ -14,20 +14,20 @@ const options = {
   debug: true,
   port: PORT,
   endpoint: '/graphql',
-  playground: '/docs'
+  playground: '/docs',
 };
 
 //create a schema
 const schema = makeExecutableSchema({
   typeDefs: graphqlConfig.typeDefs,
-  resolvers: graphqlConfig.resolvers
+  resolvers: graphqlConfig.resolvers,
 });
 //apply middlewares on the schema
 const protectedSchema = applyMiddleware(schema, authMiddleware);
 //provided the protected Schema to graphql Server
 const server = new GraphQLServer({
   schema: protectedSchema,
-  context: graphqlConfig.context
+  context: graphqlConfig.context,
 });
 
 server.start(options, () => console.log('Server is running on localhost:3000'));

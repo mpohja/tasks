@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import {AuthenticationError} from 'apollo-server';
+import { AuthenticationError } from 'apollo-server';
 
-import {APP_SECRET} from '../../config';
+import { APP_SECRET } from '../../config';
 
 async function requireAuth(resolver, parent, args, ctx, info) {
   const Authorization = ctx.request.get('Authorization');
@@ -9,8 +9,8 @@ async function requireAuth(resolver, parent, args, ctx, info) {
     throw new AuthenticationError('Authorization header is missing');
   }
   const token = Authorization.replace('Bearer ', '');
-  const {userId} = jwt.verify(token, APP_SECRET);
-  const user = await ctx.models.user.findOne({_id: userId});
+  const { userId } = jwt.verify(token, APP_SECRET);
+  const user = await ctx.models.user.findOne({ _id: userId });
   if (!user) {
     throw new AuthenticationError('UnAuthenticated');
   }
@@ -20,6 +20,6 @@ async function requireAuth(resolver, parent, args, ctx, info) {
 
 export const authMiddleware = {
   Mutation: {
-    createTask: requireAuth
-  }
+    createTask: requireAuth,
+  },
 };

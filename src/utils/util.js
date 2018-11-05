@@ -8,11 +8,11 @@ export function validateUser(user) {
     password: Joi.string()
       .min(4)
       .max(10)
-      .required()
+      .required(),
   });
-  const {error, value} = Joi.validate(user, schema);
+  const { error, value } = Joi.validate(user, schema);
   if (error && error.details) {
-    return {error};
+    return { error };
   }
-  return {value};
+  return { value };
 }
