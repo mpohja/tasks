@@ -1,0 +1,23 @@
+type Owner {
+    _id: ID!
+    email: String!
+}
+
+type Task {
+    _id : ID
+    name: String!
+    owner: Owner!
+}
+
+type Query {
+    getTask(_id: ID) : Task!
+    allTasks(filter: String): [Task]!
+}
+input TaskInput{
+    name: String!
+}
+type Mutation {
+    createTask(input: TaskInput!) : Task!
+    updateTask(_id: ID!, input: TaskInput!) : Task!
+    deleteTask(_id: ID!) : Task!
+}
