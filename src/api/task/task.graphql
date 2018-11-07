@@ -1,23 +1,37 @@
-type Owner {
-  _id: ID!
-  email: String!
+enum Status {
+  NEW
+  DONE
+  ACCEPTED
 }
 
 type Task {
   _id: ID
-  name: String!
-  owner: Owner!
+  title: String!
+  owner: User!
+  createdAt: String
+  updatedAt: String
+  status: Status
+  acceptor: User
 }
 
 type Query {
   getTask(_id: ID): Task!
   allTasks(filter: String): [Task]!
+  getTasksByUser(_id: ID): [Task]!
 }
+
 input TaskInput {
-  name: String!
+  title: String!
+  status: Status
 }
+
+input StatusInput {
+  status: Status!
+}
+
 type Mutation {
   createTask(input: TaskInput!): Task!
   updateTask(_id: ID!, input: TaskInput!): Task!
+  updateStatus(_id: ID!, input: StatusInput!): Task!
   deleteTask(_id: ID!): Task!
 }

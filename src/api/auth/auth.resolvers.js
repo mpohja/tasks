@@ -14,6 +14,7 @@ async function signup(_, { input }, ctx, info) {
   const user = await ctx.models.user.create({
     email: input.email,
     password,
+    role: input.role,
   });
   const token = jwt.sign({ userId: user._id }, APP_SECRET);
   return {
@@ -21,6 +22,7 @@ async function signup(_, { input }, ctx, info) {
     user: {
       _id: user._id,
       email: user.email,
+      role: user.role,
     },
   };
 }
@@ -44,6 +46,7 @@ async function login(parent, { input }, ctx, info) {
     user: {
       _id: user._id,
       email: user.email,
+      role: user.role,
     },
   };
 }

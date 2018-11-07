@@ -1,6 +1,12 @@
+enum Role {
+  CHILD
+  PARENT
+}
+
 type User {
   _id: ID!
-  email: String
+  email: String!
+  role: Role!
 }
 
 type AuthPayload {
@@ -8,12 +14,18 @@ type AuthPayload {
   user: User
 }
 
-input AuthInput {
+input SignupInput {
+  email: String!
+  password: String!
+  role: Role
+}
+
+input LoginInput {
   email: String!
   password: String!
 }
 
 extend type Mutation {
-  signup(input: AuthInput!): AuthPayload!
-  login(input: AuthInput!): AuthPayload!
+  signup(input: SignupInput!): AuthPayload!
+  login(input: LoginInput!): AuthPayload!
 }

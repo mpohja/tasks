@@ -9,6 +9,7 @@ export function validateUser(user) {
       .min(4)
       .max(10)
       .required(),
+    role: Joi.string(),
   });
   const { error, value } = Joi.validate(user, schema);
   if (error && error.details) {
