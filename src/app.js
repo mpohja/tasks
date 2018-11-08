@@ -5,9 +5,20 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { applyMiddleware } from 'graphql-middleware';
 import { authMiddleware } from './api/middlewares';
 
+// GraphQL have used a new method to serialize ID, the new method doesn't support ID in object type anymore, but
+// following codes will help on this:
+const { ObjectId } = mongoose.Types;
+ObjectId.prototype.valueOf = function() {
+  return this.toString();
+};
+
 const PORT = 3000;
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/tasks');
+mongoose.connect(
+  'mongodb://localhost:27017/tasks',
+  { useNewUrlParser: true }
+);
+mongoose.set('useCreateIndex', true);
 
 const options = {
   tracing: true,

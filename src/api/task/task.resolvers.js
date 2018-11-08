@@ -12,7 +12,7 @@ export default {
             ],
           }
         : {};
-      return await ctx.models.task.find(query).select('_id title status createdAt owner updatedAt');
+      return await ctx.models.task.find(query).select('_id title status createdAt owner updatedAt acceptor');
     },
     async getTasksByUser(_, { _id }, ctx) {
       const query = {
@@ -20,7 +20,7 @@ export default {
           _id,
         },
       };
-      return await ctx.models.task.find(query).select('_id title status createdAt owner updatedAt');
+      return await ctx.models.task.find(query).select('_id title status createdAt owner updatedAt acceptor');
     },
     async getTask(_, { _id }, ctx) {
       return await ctx.models.task.findById(_id);
