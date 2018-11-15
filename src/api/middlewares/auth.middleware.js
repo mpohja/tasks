@@ -19,6 +19,9 @@ async function requireAuth(resolver, parent, args, ctx, info) {
 }
 
 export const authMiddleware = {
+  Query: {
+    user: requireAuth,
+  },
   Mutation: {
     createTask: requireAuth,
     updateStatus: requireAuth,

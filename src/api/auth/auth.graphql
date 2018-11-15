@@ -29,3 +29,7 @@ extend type Mutation {
   signup(input: SignupInput!): AuthPayload!
   login(input: LoginInput!): AuthPayload!
 }
+
+extend type Query {
+  user: User!
+}

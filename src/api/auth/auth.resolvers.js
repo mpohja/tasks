@@ -51,7 +51,14 @@ async function login(parent, { input }, ctx, info) {
   };
 }
 
+async function user(_, args, ctx) {
+  return await ctx.models.user.findOne({ _id: ctx.userId });
+}
+
 export default {
+  Query: {
+    user,
+  },
   Mutation: {
     signup,
     login,

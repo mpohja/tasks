@@ -5,7 +5,7 @@ enum Status {
 }
 
 type Task {
-  _id: ID
+  _id: ID!
   title: String!
   owner: User!
   createdAt: String

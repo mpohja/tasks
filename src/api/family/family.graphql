@@ -1,0 +1,23 @@
+type Family {
+  _id: ID!
+  name: String!
+  members: [User]
+}
+
+extend type Query {
+  getFamily(_id: ID): Family!
+}
+
+input MemberInput {
+  _id: ID!
+}
+
+input FamilyInput {
+  name: String!
+  members: [MemberInput]
+}
+
+extend type Mutation {
+  createFamily(input: FamilyInput!): Family!
+  addMember(_id: ID!, member: MemberInput!): Family!
+}
