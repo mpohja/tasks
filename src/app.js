@@ -12,7 +12,7 @@ ObjectId.prototype.valueOf = function() {
   return this.toString();
 };
 
-const PORT = 3000;
+const PORT = 3001;
 mongoose.Promise = global.Promise;
 mongoose.connect(
   'mongodb://localhost:27017/tasks',
@@ -41,4 +41,4 @@ const server = new GraphQLServer({
   context: graphqlConfig.context,
 });
 
-server.start(options, () => console.log('Server is running on localhost:3000'));
+server.start(options, () => console.log(`Server is running on localhost:${PORT}`));
